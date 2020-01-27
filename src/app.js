@@ -16,9 +16,14 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-// basic endpoint for app.js
+// basic POST endpoint for app.js
+app.post("/", (req, res) => {
+  res.send("POST request received");
+});
+
+// basic GET endpoint handler for app.js
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.send("A GET Request");
 });
 
 // error handling middleware gives short response if in production
