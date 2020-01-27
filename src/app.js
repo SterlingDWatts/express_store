@@ -12,12 +12,16 @@ const app = express();
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 app.use(morgan(morganOption));
 
+// parse the body of the request
+app.use(express.json());
+
 // hide sensitive data with 'helmet' and allow cors
 app.use(helmet());
 app.use(cors());
 
 // basic POST endpoint for app.js
 app.post("/", (req, res) => {
+  console.log(req.body);
   res.send("POST request received");
 });
 
