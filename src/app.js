@@ -25,6 +25,14 @@ app.post("/", (req, res) => {
   res.send("POST request received");
 });
 
+// POST /user endpoint requiring  username, password, favorite club, and if they receive the newsletter
+app.post("/user", (req, res) => {
+  // get the data
+  const { username, password, favoriteClub, newsLetter } = req.body;
+
+  // TODO: validation code here
+});
+
 // basic GET endpoint handler for app.js
 app.get("/", (req, res) => {
   res.send("A GET Request");
