@@ -49,30 +49,38 @@ app.post("/user", (req, res) => {
   // get the data
   const { username, password, favoriteClub, newsLetter = false } = req.body;
 
+  //* Validate the data
+
+  // Validate username
+  // username is required
   if (!username) {
     return res.status(400).send("Username required");
   }
-
+  // username must be between 6 and 20 characters
   if (username.length < 6 || username.length > 20) {
     return res.status(400).send("Username must be between 6 and 20 characters");
   }
 
+  // Validate password
+  // password required
   if (!password) {
     return res.status(400).send("Password required");
   }
-
+  // password must be between 8 and 36 characters
   if (password.length < 8 || password.length > 36) {
     return res.status(400).send("Password must be between 8 and 36 characters");
   }
-
+  // password must include a digit
   if (!password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
     return res.status(400).send("Password must contain at least one digit");
   }
 
+  // Validate favoriteClub
+  // favoriteClub is required
   if (!favoriteClub) {
     return res.status(400).send("favorite Club required");
   }
-
+  // favoriteClub must be one of the clubs in the list
   const clubs = [
     "Cache Valley Stone Society",
     "Ogden Curling Club",
@@ -80,11 +88,11 @@ app.post("/user", (req, res) => {
     "Salt City Curling Club",
     "Utah Olympic Oval Curling Club"
   ];
-
   if (!clubs.includes(favoriteClub)) {
     return res.status(400).send("Not a valid club");
   }
 
+  // create a newUser object from the data and push it to user array
   const id = uuid();
   const newUser = {
     id,
@@ -93,9 +101,9 @@ app.post("/user", (req, res) => {
     favoriteClub,
     newsLetter
   };
-
   users.push(newUser);
 
+  // send message that validation has passed
   res.send("All validation passed");
 });
 
