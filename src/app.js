@@ -28,9 +28,19 @@ app.post("/", (req, res) => {
 // POST /user endpoint requiring  username, password, favorite club, and if they receive the newsletter
 app.post("/user", (req, res) => {
   // get the data
-  const { username, password, favoriteClub, newsLetter } = req.body;
+  const { username, password, favoriteClub, newsLetter = false } = req.body;
 
-  // TODO: validation code here
+  if (!username) {
+    return res.status(400).send("Username required");
+  }
+
+  if (!password) {
+    return res.status(400).send("Password required");
+  }
+
+  if (!favoriteClub) {
+    return res.status(400).send("favorite Club required");
+  }
 });
 
 // basic GET endpoint handler for app.js
