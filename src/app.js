@@ -53,6 +53,18 @@ app.post("/user", (req, res) => {
   if (!favoriteClub) {
     return res.status(400).send("favorite Club required");
   }
+
+  const clubs = [
+    "Cache Valley Stone Society",
+    "Ogden Curling Club",
+    "Park City Curling Club",
+    "Salt City Curling Club",
+    "Utah Olympic Oval Curling Club"
+  ];
+
+  if (!clubs.includes(favoriteClub)) {
+    return res.status(400).send("Not a valid club");
+  }
 });
 
 // basic GET endpoint handler for app.js
