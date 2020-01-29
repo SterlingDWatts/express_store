@@ -107,6 +107,25 @@ app.post("/user", (req, res) => {
   res.send("All validation passed");
 });
 
+app.delete("/user/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  const index = users.findIndex(u => u.id === userId);
+
+  // make sure we actually  find a user with that id
+  if (index === -1) {
+    return res.status(404).send("User not found");
+  }
+
+  users.splice(index, 1);
+
+  res.status(204).end();
+});
+
+app.get("/user", (req, res) => {
+  res.json(users);
+});
+
 // basic GET endpoint handler for app.js
 app.get("/", (req, res) => {
   res.send("A GET Request");
